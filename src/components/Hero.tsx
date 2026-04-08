@@ -34,18 +34,27 @@ export default function Hero() {
       <div className="relative z-10 text-center px-6 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 1, scale: 1, y: [0, -14, 0] }}
           transition={{
             opacity: { duration: 1, ease: [0.22, 1, 0.36, 1] },
             scale: { duration: 1, ease: [0.22, 1, 0.36, 1] },
+            y: {
+              delay: 1.2,
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            },
           }}
           className="relative mx-auto mb-8 w-fit"
         >
-          <div className="absolute -inset-8 rounded-full bg-white/5 blur-3xl" />
+          {/* outer soft glow */}
+          <div className="absolute -inset-10 rounded-full bg-white/10 blur-3xl" />
+          {/* tighter bright ring glow */}
+          <div className="absolute -inset-4 rounded-full bg-white/20 blur-xl" />
           <img
             src="/logo.png"
             alt="Alavarium Cocktail Bar"
-            className="relative mx-auto w-48 sm:w-64 md:w-80 rounded-full drop-shadow-[0_14px_28px_rgba(0,0,0,0.55)] will-change-transform"
+            className="relative mx-auto w-48 sm:w-64 md:w-80 rounded-full drop-shadow-[0_0_40px_rgba(255,255,255,0.35)] will-change-transform"
           />
         </motion.div>
 

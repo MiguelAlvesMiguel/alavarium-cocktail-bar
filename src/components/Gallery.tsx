@@ -7,7 +7,6 @@ const GALLERY_IMAGES = [
   '/assets/alavariumcocktailbar__2026-04-02T130942.000Z.jpg',
   '/assets/alavariumcocktailbar__2026-04-01T090048.000Z.jpg',
   '/assets/alavariumcocktailbar__2026-03-25T180321.000Z.jpg',
-  '/assets/alavariumcocktailbar__2024-12-19T110232.000Z.jpg',
   '/assets/alavariumcocktailbar__2026-02-12T121149.000Z.jpg',
   '/assets/alavariumcocktailbar__2024-01-11T132334.000Z.webp',
   '/assets/alavariumcocktailbar__2023-04-11T193834.000Z.webp',

@@ -1,27 +1,43 @@
-:root {
-  --bg: oklch(0.97 0.004 90);
-  --bg-deep: oklch(0.14 0.01 260);
-  --surface: oklch(0.99 0.003 90);
-  --surface-elevated: oklch(0.88 0.01 90);
-  --text: oklch(0.18 0.01 260);
-  --muted: oklch(0.45 0.02 260);
-  --muted-on-dark: oklch(0.88 0.02 90);
-  --line: oklch(0.82 0.01 260);
-  --line-strong: oklch(0.55 0.02 260);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: #fafafa;
+    background-color: #0a0a0a;
+  }
+
+  ::selection {
+    background-color: #fff;
+    color: #0a0a0a;
+  }
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer components {
+  .section-padding {
+    @apply px-5 sm:px-8 md:px-12 lg:px-20 xl:px-32;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  .menu-tabs::-webkit-scrollbar {
+    display: none;
+  }
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  .menu-tabs {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .navbar-scrolled {
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
 }

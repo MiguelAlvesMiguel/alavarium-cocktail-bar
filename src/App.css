@@ -13,9 +13,9 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem clamp(1rem, 4vw, 2.5rem);
-  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  background: #0a0a0a;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid color-mix(in oklab, #fff 12%, transparent);
 }
 
 .brand {
@@ -24,13 +24,14 @@
   gap: 0.75rem;
   text-decoration: none;
   color: inherit;
+  min-width: 0;
 }
 
 .brand__logo-btn {
   padding: 0;
-  border: 2px solid var(--line-strong);
+  border: 2px solid color-mix(in oklab, #fff 22%, transparent);
   border-radius: 50%;
-  background: var(--surface);
+  background: #000;
   cursor: zoom-in;
   overflow: hidden;
   flex-shrink: 0;
@@ -41,14 +42,15 @@
   width: 56px;
   height: 56px;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
 }
 
 .brand__name {
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: #fff;
+  line-height: 1.2;
+  max-width: min(65vw, 18rem);
 }
 
 .nav {
@@ -59,7 +61,7 @@
 }
 
 .nav a {
-  color: var(--muted);
+  color: color-mix(in oklab, #fff 78%, transparent);
   text-decoration: none;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
@@ -67,7 +69,7 @@
 }
 
 .nav a:hover {
-  color: var(--text);
+  color: #fff;
 }
 
 .hero {
@@ -90,7 +92,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
 }
 
 .hero__overlay {
@@ -125,6 +126,7 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  color: #fff;
 }
 
 .hero__tag {
@@ -139,6 +141,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+.hero .btn--ghost {
+  color: #fff;
+  border-color: color-mix(in oklab, #fff 55%, transparent);
+}
+
+.hero .btn--ghost:hover {
+  background: color-mix(in oklab, #fff 12%, transparent);
+  color: #fff;
 }
 
 .btn {
@@ -302,7 +314,6 @@
   aspect-ratio: 4/3;
   object-fit: cover;
   display: block;
-  filter: grayscale(1);
   transition: transform 0.35s ease;
 }
 
@@ -331,7 +342,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
   display: block;
 }
 
@@ -406,7 +416,6 @@
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
-  filter: grayscale(1);
   transition: transform 0.3s ease;
 }
 
@@ -440,7 +449,6 @@
   aspect-ratio: 16/10;
   object-fit: cover;
   display: block;
-  filter: grayscale(1);
   pointer-events: none;
 }
 

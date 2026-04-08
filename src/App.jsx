@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import Lightbox from './Lightbox.jsx'
 import {
   HERO_IMAGE_URL,
-  LOGO_URL,
+  LOGO_PATH,
   EURO_AND_BOOKING_IMAGE,
   LINKS,
   LOCAL_IMAGES,
@@ -36,12 +36,12 @@ export default function App() {
           <button
             type="button"
             className="brand__logo-btn"
-            onClick={() => showImage(LOGO_URL, 'Alavarium Cocktail Bar')}
+            onClick={() => showImage(LOGO_PATH, 'Alavarium Cocktail Bar')}
             aria-label="Ampliar logótipo"
           >
-            <img src={LOGO_URL} alt="" className="brand__logo" width={56} height={56} />
+            <img src={LOGO_PATH} alt="" className="brand__logo" width={56} height={56} />
           </button>
-          <span className="brand__name">Alavarium</span>
+          <span className="brand__name">Alavarium Cocktail Bar</span>
         </a>
         <nav className="nav" aria-label="Principal">
           <a href="#center">Início</a>

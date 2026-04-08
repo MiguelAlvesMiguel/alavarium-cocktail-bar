@@ -1,9 +1,9 @@
-/** URL do hero (exterior / fachada) e logótipo — pedido explicitamente. */
+/** URL do hero (exterior / fachada). */
 export const HERO_IMAGE_URL =
   'https://lh3.googleusercontent.com/gps-cs-s/AHVAweqrE7rH1gWfEFGjrRP2wLJKb0lJAM8JbyyED-DaDKOCmGe_WSTSShCJDF293imJH8cYYT6muJDOd4gf89pd_0R-tJfvS6Hn7zKmF76Dx3vE_YngmNX46zCgpds2XkL_PHRXYwM=s0'
 
-export const LOGO_URL =
-  'https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-19/209256180_3016438731971770_2307907720029622839_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.flis9-1.fna.fbcdn.net&_nc_cat=110&_nc_oc=Q6cZ2gHK_luKsVoPxtNKqneVVHz94AkMqAyMgwbFliL2hGb5amr11iVF_IKbXqN3qimeT7w&_nc_ohc=5_c_ng6iSWgQ7kNvwFNLgT9&_nc_gid=h4gHQCMY4hfCJolFhwlGUw&edm=APoiHPcBAAAA&ccb=7-5&oh=00_Af0tg1s2lTGVT0ue3vsi9dPP84RzzaNT8wbJnOq7rHlGlA&oe=69DC8EAE&_nc_sid=22de04'
+/** Logótipo local (public/logo.png). */
+export const LOGO_PATH = '/logo.png'
 
 /** Mesma imagem nas secções «Euro» e «Reservar mesa». */
 export const EURO_AND_BOOKING_IMAGE = '/assets/alavariumcocktailbar__2026-04-01T090048.000Z.jpg'

@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { MapPin, Clock, Instagram, Facebook } from 'lucide-react'
 
 const GMAPS_LINK =
-  'https://www.google.com/maps/place/Alavarium+Cocktail+Bar/@40.6412,-8.6538,17z/'
+  'https://www.google.com/maps/place/Alavarium+Cocktail+Bar/@40.6412,-8.6538,17z/data=!4m6!3m5!1s0xd2398033df80d7f:0xe8dde7e6b0398a7a!8m2!3d40.6428084!4d-8.6563199!16s%2Fg%2F11ckvlf0rn?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D'
 
 export default function Contact() {
   const ref = useRef(null)
@@ -33,8 +33,8 @@ export default function Contact() {
                 <div>
                   <p className="text-brand-900 font-medium">Morada</p>
                   <p className="text-brand-500 mt-1 leading-relaxed">
-                    Aveiro<br />
-                    Distrito de Aveiro<br />
+                    R. do Lavadouro 2<br />
+                    3800-198 Aveiro<br />
                     Portugal
                   </p>
                   <a
@@ -52,8 +52,10 @@ export default function Contact() {
                 <Clock size={20} className="text-brand-400 flex-shrink-0 mt-1" />
                 <div>
                   <p className="text-brand-900 font-medium">Horário</p>
-                  <div className="text-brand-500 mt-1 space-y-0.5 text-sm">
-                    <p>Consulta horários atualizados nas nossas redes sociais</p>
+                  <div className="text-brand-500 mt-1 space-y-1 text-sm leading-relaxed">
+                    <p><strong className="text-brand-700">Segunda:</strong> 10:30 – 20:00</p>
+                    <p><strong className="text-brand-700">Terça a Sábado:</strong> 10:30 – 02:00</p>
+                    <p><strong className="text-brand-700">Domingo:</strong> Encerrado</p>
                   </div>
                 </div>
               </div>

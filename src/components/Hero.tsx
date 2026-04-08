@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { MapPin, ChevronDown } from 'lucide-react'
 
 const GMAPS_LINK =
-  'https://www.google.com/maps/place/Alavarium+Cocktail+Bar/@40.6412,-8.6538,17z/'
+  'https://www.google.com/maps/place/Alavarium+Cocktail+Bar/@40.6412,-8.6538,17z/data=!4m6!3m5!1s0xd2398033df80d7f:0xe8dde7e6b0398a7a!8m2!3d40.6428084!4d-8.6563199!16s%2Fg%2F11ckvlf0rn?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D'
 
 const FEATURED_LINKS = [
   {
@@ -34,27 +34,21 @@ export default function Hero() {
       <div className="relative z-10 text-center px-6 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1, y: [0, -14, 0] }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
             opacity: { duration: 1, ease: [0.22, 1, 0.36, 1] },
             scale: { duration: 1, ease: [0.22, 1, 0.36, 1] },
-            y: {
-              delay: 1.2,
-              duration: 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            },
           }}
           className="relative mx-auto mb-8 w-fit"
         >
           {/* outer soft glow */}
-          <div className="absolute -inset-10 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -inset-10 rounded-full bg-white/10 blur-3xl animate-float" />
           {/* tighter bright ring glow */}
-          <div className="absolute -inset-4 rounded-full bg-white/20 blur-xl" />
+          <div className="absolute -inset-4 rounded-full bg-white/20 blur-xl animate-float" />
           <img
             src="/logo.png"
             alt="Alavarium Cocktail Bar"
-            className="relative mx-auto w-48 sm:w-64 md:w-80 rounded-full drop-shadow-[0_0_40px_rgba(255,255,255,0.35)] will-change-transform"
+            className="relative mx-auto w-48 sm:w-64 md:w-80 rounded-full drop-shadow-[0_0_40px_rgba(255,255,255,0.35)] animate-float"
           />
         </motion.div>
 

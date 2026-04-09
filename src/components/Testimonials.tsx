@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import { testimonials } from '../data/testimonials'
 
 function Stars({ count }: { count: number }) {
@@ -53,11 +53,6 @@ export default function Testimonials() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 relative"
         >
-          <Quote
-            size={48}
-            className="text-white/10 absolute -top-4 left-0 md:left-8"
-          />
-
           <motion.div
             key={current}
             initial={{ opacity: 0, x: 20 }}
@@ -68,7 +63,7 @@ export default function Testimonials() {
             <Stars count={t.rating} />
 
             <blockquote className="mt-6 text-white/80 font-body text-lg sm:text-xl leading-relaxed">
-              &ldquo;{t.text}&rdquo;
+              {t.text}
             </blockquote>
 
             <div className="mt-8">

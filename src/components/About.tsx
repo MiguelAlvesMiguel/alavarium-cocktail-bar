@@ -21,7 +21,7 @@ const HIGHLIGHTS = [
   },
 ]
 
-const ABOUT_IMAGE = '/assets/alavariumcocktailbar__2024-12-27T140048.000Z.jpg'
+const ABOUT_IMAGE = '/about-interior.webp'
 
 export default function About({ onMediaClick }: { onMediaClick: (item: LightboxItem) => void }) {
   const ref = useRef(null)

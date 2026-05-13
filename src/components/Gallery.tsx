@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Instagram } from 'lucide-react'
 import type { LightboxItem } from '../App'
 import { useI18n } from '../i18n/I18nContext'
@@ -22,19 +22,60 @@ const GALLERY_VIDEOS = [
   '/assets/alavariumcocktailbar__2023-06-20T131810.000Z.mp4',
 ]
 
-type GalleryMedia = { src: string; kind: 'image' | 'video' }
+const VIDEO_POSTERS: Record<string, string> = {}
+
+type GalleryMedia = {
+  src: string
+  kind: 'image' | 'video'
+  ratio: number // height / width — videos use fixed 16/9 = 1.778
+}
 
 const galleryMedia: GalleryMedia[] = [
-  ...GALLERY_IMAGES.slice(0, 3).map((src) => ({ src, kind: 'image' as const })),
-  { src: GALLERY_VIDEOS[0], kind: 'video' as const },
-  ...GALLERY_IMAGES.slice(3, 7).map((src) => ({ src, kind: 'image' as const })),
-  { src: GALLERY_VIDEOS[1], kind: 'video' as const },
-  ...GALLERY_IMAGES.slice(7).map((src) => ({ src, kind: 'image' as const })),
+  ...GALLERY_IMAGES.slice(0, 3).map((src) => ({ src, kind: 'image' as const, ratio: 1 })),
+  { src: GALLERY_VIDEOS[0], kind: 'video' as const, ratio: 16 / 9 },
+  ...GALLERY_IMAGES.slice(3, 7).map((src) => ({ src, kind: 'image' as const, ratio: 1 })),
+  { src: GALLERY_VIDEOS[1], kind: 'video' as const, ratio: 16 / 9 },
+  ...GALLERY_IMAGES.slice(7).map((src) => ({ src, kind: 'image' as const, ratio: 1 })),
 ]
 
-function distribute(items: GalleryMedia[], columns: number): GalleryMedia[][] {
-  const cols: GalleryMedia[][] = Array.from({ length: columns }, () => [])
-  items.forEach((item, i) => cols[i % columns].push(item))
+function useImageRatios(items: GalleryMedia[]): number[] {
+  const [ratios, setRatios] = useState<number[]>(() => items.map((m) => m.ratio))
+
+  useEffect(() => {
+    let cancelled = false
+    const next = [...ratios]
+    items.forEach((m, idx) => {
+      if (m.kind !== 'image') return
+      const img = new Image()
+      img.onload = () => {
+        if (cancelled) return
+        if (img.naturalWidth > 0) {
+          next[idx] = img.naturalHeight / img.naturalWidth
+          setRatios([...next])
+        }
+      }
+      img.src = m.src
+    })
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return ratios
+}
+
+function packColumns(items: GalleryMedia[], ratios: number[], columns: number): number[][] {
+  const heights = new Array(columns).fill(0) as number[]
+  const cols: number[][] = Array.from({ length: columns }, () => [])
+  items.forEach((_, i) => {
+    let shortest = 0
+    for (let c = 1; c < columns; c++) {
+      if (heights[c] < heights[shortest]) shortest = c
+    }
+    cols[shortest].push(i)
+    heights[shortest] += ratios[i]
+  })
   return cols
 }
 
@@ -43,49 +84,56 @@ export default function Gallery({ onMediaClick }: { onMediaClick: (item: Lightbo
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
-  const colsLg = distribute(galleryMedia, 3)
-  const colsSm = distribute(galleryMedia, 2)
+  const ratios = useImageRatios(galleryMedia)
 
-  const renderItem = (media: GalleryMedia, i: number) => (
-    <motion.div
-      key={`${media.src}-${i}`}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={inView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.5, delay: i * 0.04 }}
-      className="overflow-hidden group"
-    >
-      {media.kind === 'video' ? (
-        <button
-          type="button"
-          onClick={() => onMediaClick({ kind: 'video', src: media.src })}
-          className="relative w-full aspect-[9/16] bg-black cursor-zoom-in"
-        >
-          <video
-            src={media.src}
-            muted
-            loop
-            autoPlay
-            playsInline
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-        </button>
-      ) : (
-        <button
-          type="button"
-          onClick={() => onMediaClick({ kind: 'image', src: media.src, alt: 'Alavarium' })}
-          className="w-full cursor-zoom-in block"
-        >
-          <img
-            src={media.src}
-            alt={`Alavarium ${i + 1}`}
-            loading="lazy"
-            className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-          />
-        </button>
-      )}
-    </motion.div>
-  )
+  const colsLg = useMemo(() => packColumns(galleryMedia, ratios, 3), [ratios])
+  const colsSm = useMemo(() => packColumns(galleryMedia, ratios, 2), [ratios])
+
+  const renderItem = (idx: number, animIndex: number) => {
+    const media = galleryMedia[idx]
+    return (
+      <motion.div
+        key={`${media.src}-${idx}`}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={inView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.5, delay: animIndex * 0.04 }}
+        className="overflow-hidden group"
+      >
+        {media.kind === 'video' ? (
+          <button
+            type="button"
+            onClick={() => onMediaClick({ kind: 'video', src: media.src })}
+            className="relative w-full aspect-[9/16] bg-black cursor-zoom-in block"
+          >
+            <video
+              src={media.src}
+              poster={VIDEO_POSTERS[media.src]}
+              muted
+              loop
+              autoPlay
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => onMediaClick({ kind: 'image', src: media.src, alt: 'Alavarium' })}
+            className="w-full cursor-zoom-in block"
+          >
+            <img
+              src={media.src}
+              alt={`Alavarium ${idx + 1}`}
+              loading="lazy"
+              className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+            />
+          </button>
+        )}
+      </motion.div>
+    )
+  }
 
   return (
     <section
@@ -118,21 +166,21 @@ export default function Gallery({ onMediaClick }: { onMediaClick: (item: Lightbo
         </motion.div>
 
         <div className="flex flex-col sm:hidden gap-3">
-          {galleryMedia.map((m, i) => renderItem(m, i))}
+          {galleryMedia.map((_, i) => renderItem(i, i))}
         </div>
 
-        <div className="hidden sm:flex lg:hidden gap-3">
+        <div className="hidden sm:flex lg:hidden gap-3 items-start">
           {colsSm.map((col, ci) => (
-            <div key={ci} className="flex-1 flex flex-col gap-3">
-              {col.map((m, i) => renderItem(m, ci * 100 + i))}
+            <div key={ci} className="flex-1 flex flex-col gap-3 min-w-0">
+              {col.map((idx, i) => renderItem(idx, ci * 100 + i))}
             </div>
           ))}
         </div>
 
-        <div className="hidden lg:flex gap-3">
+        <div className="hidden lg:flex gap-3 items-start">
           {colsLg.map((col, ci) => (
-            <div key={ci} className="flex-1 flex flex-col gap-3">
-              {col.map((m, i) => renderItem(m, ci * 100 + i))}
+            <div key={ci} className="flex-1 flex flex-col gap-3 min-w-0">
+              {col.map((idx, i) => renderItem(idx, ci * 100 + i))}
             </div>
           ))}
         </div>

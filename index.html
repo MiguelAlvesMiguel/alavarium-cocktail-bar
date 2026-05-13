@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
     <title>Alavarium Cocktail Bar — Aveiro, Portugal</title>
     <meta name="description" content="Alavarium Cocktail & Wine Bar em Aveiro. Cocktails autorais, vinhos selecionados e noites inesquecíveis." />
     <meta property="og:title" content="Alavarium Cocktail Bar — Aveiro" />
@@ -15,6 +16,36 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <!-- Netlify parses these at deploy to enable Forms for the SPA. -->
+    <form
+      name="table-reservation"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      style="display: none"
+      aria-hidden="true"
+    >
+      <input type="text" name="customer-name" />
+      <input type="tel" name="phone" />
+      <input type="text" name="guests" />
+      <input type="text" name="date" />
+      <input type="text" name="time" />
+      <textarea name="notes"></textarea>
+      <input name="bot-field" />
+    </form>
+    <form
+      name="site-inquiry"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      style="display: none"
+      aria-hidden="true"
+    >
+      <input type="text" name="inquiry-name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+      <input name="bot-field" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

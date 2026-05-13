@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import type { MouseEvent } from 'react'
 import { Menu, X, Instagram, Facebook } from 'lucide-react'
 
 const NAV_LINKS = [
@@ -13,6 +14,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const lockedScrollY = useRef(0)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -21,11 +23,40 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return
+
+    const { body } = document
+    const previousStyles = {
+      overflow: body.style.overflow,
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+    }
+
+    lockedScrollY.current = window.scrollY
+    body.style.overflow = 'hidden'
+    body.style.position = 'fixed'
+    body.style.top = `-${lockedScrollY.current}px`
+    body.style.width = '100%'
+
     return () => {
-      document.body.style.overflow = ''
+      body.style.overflow = previousStyles.overflow
+      body.style.position = previousStyles.position
+      body.style.top = previousStyles.top
+      body.style.width = previousStyles.width
+      window.scrollTo(0, lockedScrollY.current)
     }
   }, [open])
+
+  const handleMenuLinkClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault()
+    setOpen(false)
+
+    window.setTimeout(() => {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+      window.history.pushState(null, '', href)
+    }, 0)
+  }
 
   return (
     <header
@@ -95,7 +126,7 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 bg-brand-950 transition-all duration-500 lg:hidden flex flex-col items-center justify-center ${
+        className={`fixed inset-0 z-40 h-dvh min-h-screen bg-brand-950 transition-all duration-500 lg:hidden flex flex-col items-center justify-center overflow-y-auto ${
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -110,7 +141,7 @@ export default function Navbar() {
             >
               <a
                 href={link.href}
-                onClick={() => setOpen(false)}
+                onClick={(event) => handleMenuLinkClick(event, link.href)}
                 className="text-white text-2xl font-display tracking-wide"
               >
                 {link.label}
@@ -138,7 +169,7 @@ export default function Navbar() {
         </div>
         <a
           href="#reserve"
-          onClick={() => setOpen(false)}
+          onClick={(event) => handleMenuLinkClick(event, '#reserve')}
           className="mt-8 px-8 py-3 bg-white text-brand-950 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors"
         >
           Reservar Mesa

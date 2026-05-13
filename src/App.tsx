@@ -30,7 +30,7 @@ export default function App() {
         <About onMediaClick={openLightbox} />
         <Menu />
         <Gallery onMediaClick={openLightbox} />
-        <Testimonials />
+        <Testimonials onMediaClick={openLightbox} />
         <BookTable />
         <Contact />
       </main>

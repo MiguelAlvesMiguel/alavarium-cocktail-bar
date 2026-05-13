@@ -31,9 +31,59 @@ const galleryMedia: GalleryMedia[] = [
   ...GALLERY_IMAGES.slice(7).map((src) => ({ src, kind: 'image' as const })),
 ]
 
+function distribute(items: GalleryMedia[], columns: number): GalleryMedia[][] {
+  const cols: GalleryMedia[][] = Array.from({ length: columns }, () => [])
+  items.forEach((item, i) => cols[i % columns].push(item))
+  return cols
+}
+
 export default function Gallery({ onMediaClick }: { onMediaClick: (item: LightboxItem) => void }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  const colsLg = distribute(galleryMedia, 3)
+  const colsSm = distribute(galleryMedia, 2)
+
+  const renderItem = (media: GalleryMedia, i: number) => (
+    <motion.div
+      key={`${media.src}-${i}`}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={inView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.5, delay: i * 0.04 }}
+      className="overflow-hidden group"
+    >
+      {media.kind === 'video' ? (
+        <button
+          type="button"
+          onClick={() => onMediaClick({ kind: 'video', src: media.src })}
+          className="relative w-full aspect-[9/16] bg-black cursor-zoom-in"
+        >
+          <video
+            src={media.src}
+            muted
+            loop
+            autoPlay
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => onMediaClick({ kind: 'image', src: media.src, alt: 'Alavarium' })}
+          className="w-full cursor-zoom-in block"
+        >
+          <img
+            src={media.src}
+            alt={`Alavarium ${i + 1}`}
+            loading="lazy"
+            className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+          />
+        </button>
+      )}
+    </motion.div>
+  )
 
   return (
     <section
@@ -65,46 +115,23 @@ export default function Gallery({ onMediaClick }: { onMediaClick: (item: Lightbo
           </a>
         </motion.div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 [column-fill:_balance]">
-          {galleryMedia.map((media, i) => (
-            <motion.div
-              key={`${media.src}-${i}`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="mb-3 break-inside-avoid overflow-hidden group"
-            >
-              {media.kind === 'video' ? (
-                <button
-                  type="button"
-                  onClick={() => onMediaClick({ kind: 'video', src: media.src })}
-                  className="relative w-full aspect-[9/16] max-h-[620px] bg-black cursor-zoom-in"
-                >
-                  <video
-                    src={media.src}
-                    muted
-                    loop
-                    autoPlay
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => onMediaClick({ kind: 'image', src: media.src, alt: 'Alavarium' })}
-                  className="w-full cursor-zoom-in"
-                >
-                  <img
-                    src={media.src}
-                    alt={`Alavarium ${i + 1}`}
-                    loading="lazy"
-                    className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-                  />
-                </button>
-              )}
-            </motion.div>
+        <div className="flex flex-col sm:hidden gap-3">
+          {galleryMedia.map((m, i) => renderItem(m, i))}
+        </div>
+
+        <div className="hidden sm:flex lg:hidden gap-3">
+          {colsSm.map((col, ci) => (
+            <div key={ci} className="flex-1 flex flex-col gap-3">
+              {col.map((m, i) => renderItem(m, ci * 100 + i))}
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden lg:flex gap-3">
+          {colsLg.map((col, ci) => (
+            <div key={ci} className="flex-1 flex flex-col gap-3">
+              {col.map((m, i) => renderItem(m, ci * 100 + i))}
+            </div>
           ))}
         </div>
       </div>

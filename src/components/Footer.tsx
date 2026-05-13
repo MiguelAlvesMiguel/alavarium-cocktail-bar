@@ -62,9 +62,27 @@ export default function Footer() {
           <p className="text-white/40 text-xs">
             &copy; {new Date().getFullYear()} Alavarium Cocktail Bar. Todos os direitos reservados.
           </p>
-          <p className="text-white/35 text-xs">
-            Aveiro, Portugal
-          </p>
+          <div className="flex flex-col sm:items-end gap-2 text-xs">
+            <p className="text-white/35">
+              Aveiro, Portugal
+            </p>
+            <a
+              href="https://www.livroreclamacoes.pt/Inicio/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/45 underline underline-offset-4 hover:text-white transition-colors"
+            >
+              Livro de Reclamações
+            </a>
+            <a
+              href="https://www.nexosolutions.co/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/35 underline underline-offset-4 hover:text-white transition-colors"
+            >
+              Developed by Nexo Solutions
+            </a>
+          </div>
         </div>
       </div>
     </footer>

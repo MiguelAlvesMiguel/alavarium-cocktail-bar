@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Star, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import { testimonials } from '../data/testimonials'
+import type { LightboxItem } from '../App'
 
 function Stars({ count }: { count: number }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex justify-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
@@ -18,7 +19,7 @@ function Stars({ count }: { count: number }) {
   )
 }
 
-export default function Testimonials() {
+export default function Testimonials({ onMediaClick }: { onMediaClick: (item: LightboxItem) => void }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [current, setCurrent] = useState(0)
@@ -58,20 +59,50 @@ export default function Testimonials() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center px-4 md:px-16"
+            className="text-center px-4 md:px-16 flex flex-col items-center"
           >
             <Stars count={t.rating} />
 
-            <blockquote className="mt-6 text-white/80 font-body text-lg sm:text-xl leading-relaxed">
-              {t.text}
+            <blockquote className="mt-6 text-white/80 font-body text-lg sm:text-xl leading-relaxed max-w-2xl">
+              “{t.text}”
             </blockquote>
 
             <div className="mt-8">
               <p className="text-white font-display text-lg">{t.author}</p>
-              <p className="text-white/35 text-sm mt-1">
-                {t.source} &middot; {t.date}
-              </p>
+              <p className="text-white/35 text-sm mt-1">Google Reviews</p>
             </div>
+
+            {t.images.length > 0 && (
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                {t.images.map((img, i) => (
+                  <button
+                    key={img}
+                    type="button"
+                    onClick={() => onMediaClick({ kind: 'image', src: img, alt: `${t.author} - foto ${i + 1}` })}
+                    className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-md border border-white/10 hover:border-white/40 transition-colors cursor-zoom-in group"
+                    aria-label={`Ver foto ${i + 1} de ${t.author}`}
+                  >
+                    <img
+                      src={img}
+                      alt={`${t.author} - foto ${i + 1}`}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <a
+              href={t.reviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:border-white/60 text-white/80 hover:text-white text-xs tracking-[0.2em] uppercase font-body transition-colors"
+            >
+              <span>Ver no Google</span>
+              <ExternalLink size={14} />
+            </a>
           </motion.div>
 
           <div className="mt-10 flex items-center justify-center gap-4">

@@ -1,17 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import type { MouseEvent } from 'react'
 import { Menu, X, Instagram, Facebook } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const NAV_LINKS = [
-  { href: '#about', label: 'Sobre' },
-  { href: '#carta', label: 'Carta' },
-  { href: '#gallery', label: 'Galeria' },
-  { href: '#testimonials', label: 'Testemunhos' },
-  { href: '#reserve', label: 'Reservar' },
-  { href: '#contact', label: 'Contacto' },
-]
+  { href: '#about', key: 'nav.about' },
+  { href: '#carta', key: 'nav.menu' },
+  { href: '#gallery', key: 'nav.gallery' },
+  { href: '#testimonials', key: 'nav.testimonials' },
+  { href: '#reserve', key: 'nav.reserve' },
+  { href: '#contact', key: 'nav.contact' },
+] as const
 
 export default function Navbar() {
+  const { t } = useI18n()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const lockedScrollY = useRef(0)
@@ -83,13 +86,14 @@ export default function Navbar() {
                 href={link.href}
                 className="text-white/70 hover:text-white text-sm font-body tracking-wide uppercase transition-colors duration-300"
               >
-                {link.label}
+                {t(link.key)}
               </a>
             </li>
           ))}
         </ul>
 
         <div className="hidden lg:flex items-center gap-4">
+          <LanguageSwitcher variant="dark" />
           <a
             href="https://www.instagram.com/alavariumcocktailbar/"
             target="_blank"
@@ -112,17 +116,20 @@ export default function Navbar() {
             href="#reserve"
             className="ml-2 px-5 py-2 bg-white text-brand-950 text-xs font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
           >
-            Reservar
+            {t('nav.reserveCta')}
           </a>
         </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="relative z-50 lg:hidden text-white"
-          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="lg:hidden flex items-center gap-3 relative z-50">
+          <LanguageSwitcher variant="dark" />
+          <button
+            onClick={() => setOpen(!open)}
+            className="text-white"
+            aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       <div
@@ -144,7 +151,7 @@ export default function Navbar() {
                 onClick={(event) => handleMenuLinkClick(event, link.href)}
                 className="text-white text-2xl font-display tracking-wide"
               >
-                {link.label}
+                {t(link.key)}
               </a>
             </li>
           ))}
@@ -172,7 +179,7 @@ export default function Navbar() {
           onClick={(event) => handleMenuLinkClick(event, '#reserve')}
           className="mt-8 px-8 py-3 bg-white text-brand-950 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors"
         >
-          Reservar Mesa
+          {t('nav.reserveTableCta')}
         </a>
       </div>
     </header>

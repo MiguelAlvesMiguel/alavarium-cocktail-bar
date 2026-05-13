@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Instagram } from 'lucide-react'
 import type { LightboxItem } from '../App'
+import { useI18n } from '../i18n/I18nContext'
 
 const GALLERY_IMAGES = [
   '/assets/alavariumcocktailbar__2026-04-02T130942.000Z.jpg',
@@ -38,6 +39,7 @@ function distribute(items: GalleryMedia[], columns: number): GalleryMedia[][] {
 }
 
 export default function Gallery({ onMediaClick }: { onMediaClick: (item: LightboxItem) => void }) {
+  const { t } = useI18n()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -99,9 +101,9 @@ export default function Gallery({ onMediaClick }: { onMediaClick: (item: Lightbo
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
         >
           <div>
-            <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">Galeria</p>
+            <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">{t('gallery.kicker')}</p>
             <h2 className="font-display text-brand-900 text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Momentos & Sabores
+              {t('gallery.title')}
             </h2>
           </div>
           <a
@@ -111,7 +113,7 @@ export default function Gallery({ onMediaClick }: { onMediaClick: (item: Lightbo
             className="group flex items-center gap-2 text-brand-600 hover:text-brand-900 text-sm font-medium transition-colors"
           >
             <Instagram size={16} />
-            <span>Ver mais no Instagram</span>
+            <span>{t('gallery.instagram')}</span>
           </a>
         </motion.div>
 

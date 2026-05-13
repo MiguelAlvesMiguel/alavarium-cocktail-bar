@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { menuCategories } from '../data/menu'
+import { menuCategories, tr } from '../data/menu'
+import { useI18n } from '../i18n/I18nContext'
 
 export default function Menu() {
+  const { t, lang } = useI18n()
   const [active, setActive] = useState(menuCategories[0].id)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
@@ -21,9 +23,9 @@ export default function Menu() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-white/50 font-body text-sm tracking-[0.3em] uppercase mb-4">Carta</p>
+          <p className="text-white/50 font-body text-sm tracking-[0.3em] uppercase mb-4">{t('menu.kicker')}</p>
           <h2 className="font-display text-white text-3xl sm:text-4xl md:text-5xl leading-tight">
-            A Nossa Carta
+            {t('menu.title')}
           </h2>
         </motion.div>
 
@@ -44,29 +46,29 @@ export default function Menu() {
                     : 'text-white/70 hover:text-white'
                 }`}
               >
-                {cat.label}
+                {tr(cat.label, lang)}
               </button>
             ))}
           </div>
         </motion.div>
 
         <motion.div
-          key={active}
+          key={`${active}-${lang}`}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8"
         >
           <p className="text-white/40 text-xs tracking-[0.3em] uppercase mb-8">
-            {category.label}
+            {tr(category.label, lang)}
           </p>
 
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
             {category.items.map((item) => (
-              <div key={item.name} className="group border-b border-white/10 pb-4">
+              <div key={item.name.pt} className="group border-b border-white/10 pb-4">
                 <div className="flex items-baseline justify-between gap-4">
                   <h4 className="font-display text-white/90 text-base sm:text-lg leading-snug group-hover:text-white transition-colors duration-300">
-                    {item.name}
+                    {tr(item.name, lang)}
                   </h4>
                   <span className="flex-shrink-0 text-white/60 font-body text-sm tabular-nums font-medium">
                     €{item.price.toFixed(item.price % 1 === 0 ? 0 : 1)}
@@ -74,7 +76,7 @@ export default function Menu() {
                 </div>
                 {item.description && (
                   <p className="mt-1 text-white/40 text-sm leading-relaxed">
-                    {item.description}
+                    {tr(item.description, lang)}
                   </p>
                 )}
               </div>

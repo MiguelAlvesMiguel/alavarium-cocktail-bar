@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Star, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import { testimonials } from '../data/testimonials'
 import type { LightboxItem } from '../App'
+import { useI18n } from '../i18n/I18nContext'
 
 function Stars({ count }: { count: number }) {
   return (
@@ -20,6 +21,7 @@ function Stars({ count }: { count: number }) {
 }
 
 export default function Testimonials({ onMediaClick }: { onMediaClick: (item: LightboxItem) => void }) {
+  const { t } = useI18n()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const [current, setCurrent] = useState(0)
@@ -27,7 +29,7 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
   const prev = () => setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1))
   const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1))
 
-  const t = testimonials[current]
+  const review = testimonials[current]
 
   return (
     <section
@@ -42,9 +44,9 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center"
         >
-          <p className="text-white/50 font-body text-sm tracking-[0.3em] uppercase mb-4">Testemunhos</p>
+          <p className="text-white/50 font-body text-sm tracking-[0.3em] uppercase mb-4">{t('testimonials.kicker')}</p>
           <h2 className="font-display text-white text-3xl sm:text-4xl md:text-5xl leading-tight">
-            O que dizem os nossos clientes
+            {t('testimonials.title')}
           </h2>
         </motion.div>
 
@@ -61,30 +63,30 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="text-center px-4 md:px-16 flex flex-col items-center"
           >
-            <Stars count={t.rating} />
+            <Stars count={review.rating} />
 
             <blockquote className="mt-6 text-white/80 font-body text-lg sm:text-xl leading-relaxed max-w-2xl">
-              “{t.text}”
+              “{review.text}”
             </blockquote>
 
             <div className="mt-8">
-              <p className="text-white font-display text-lg">{t.author}</p>
-              <p className="text-white/35 text-sm mt-1">Google Reviews</p>
+              <p className="text-white font-display text-lg">{review.author}</p>
+              <p className="text-white/35 text-sm mt-1">{t('testimonials.source')}</p>
             </div>
 
-            {t.images.length > 0 && (
+            {review.images.length > 0 && (
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                {t.images.map((img, i) => (
+                {review.images.map((img, i) => (
                   <button
                     key={img}
                     type="button"
-                    onClick={() => onMediaClick({ kind: 'image', src: img, alt: `${t.author} - foto ${i + 1}` })}
+                    onClick={() => onMediaClick({ kind: 'image', src: img, alt: `${review.author} - photo ${i + 1}` })}
                     className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-md border border-white/10 hover:border-white/40 transition-colors cursor-zoom-in group"
-                    aria-label={`Ver foto ${i + 1} de ${t.author}`}
+                    aria-label={`${review.author} - photo ${i + 1}`}
                   >
                     <img
                       src={img}
-                      alt={`${t.author} - foto ${i + 1}`}
+                      alt={`${review.author} - photo ${i + 1}`}
                       loading="lazy"
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -95,12 +97,12 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
             )}
 
             <a
-              href={t.reviewUrl}
+              href={review.reviewUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:border-white/60 text-white/80 hover:text-white text-xs tracking-[0.2em] uppercase font-body transition-colors"
             >
-              <span>Ver no Google</span>
+              <span>{t('testimonials.seeOnGoogle')}</span>
               <ExternalLink size={14} />
             </a>
           </motion.div>
@@ -109,7 +111,7 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
             <button
               onClick={prev}
               className="p-2 text-white/30 hover:text-white transition-colors"
-              aria-label="Testemunho anterior"
+              aria-label={t('testimonials.prev')}
             >
               <ChevronLeft size={20} />
             </button>
@@ -130,7 +132,7 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
             <button
               onClick={next}
               className="p-2 text-white/30 hover:text-white transition-colors"
-              aria-label="Próximo testemunho"
+              aria-label={t('testimonials.next')}
             >
               <ChevronRight size={20} />
             </button>

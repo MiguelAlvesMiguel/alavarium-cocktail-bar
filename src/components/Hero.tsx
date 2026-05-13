@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { MapPin, ChevronDown } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
 const GMAPS_LINK =
   'https://www.google.com/maps/place/Alavarium+Cocktail+Bar/@40.6412,-8.6538,17z/data=!4m6!3m5!1s0xd2398033df80d7f:0xe8dde7e6b0398a7a!8m2!3d40.6428084!4d-8.6563199!16s%2Fg%2F11ckvlf0rn?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D'
@@ -20,6 +21,7 @@ const FEATURED_LINKS = [
 ]
 
 export default function Hero() {
+  const { t } = useI18n()
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
@@ -59,14 +61,14 @@ export default function Hero() {
           className="space-y-2"
         >
           <p className="text-white/60 font-body text-sm sm:text-base tracking-[0.35em] uppercase">
-            Cocktail & Wine Bar · Aveiro
+            {t('hero.tagline')}
           </p>
           <h1 className="font-display text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
             Alavarium<br />
             Cocktail Bar
           </h1>
           <p className="text-white/50 font-body text-base sm:text-lg mt-4 max-w-lg mx-auto">
-            Noites elegantes, cocktails autorais e ambiente intimista no coração de Aveiro.
+            {t('hero.subtitle')}
           </p>
         </motion.div>
 
@@ -80,7 +82,7 @@ export default function Hero() {
             href="#reserve"
             className="px-8 py-3.5 bg-white text-brand-950 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
           >
-            Reservar Mesa
+            {t('hero.reserve')}
           </a>
           <a
             href={GMAPS_LINK}
@@ -89,7 +91,7 @@ export default function Hero() {
             className="group flex items-center gap-2 px-8 py-3.5 border border-white/25 text-white text-sm font-semibold uppercase tracking-widest hover:border-white/60 transition-colors duration-300"
           >
             <MapPin size={16} className="group-hover:text-white transition-colors" />
-            Ver Localização
+            {t('hero.location')}
           </a>
         </motion.div>
 
@@ -100,7 +102,7 @@ export default function Hero() {
           className="mt-10"
         >
           <p className="text-white/30 text-[11px] uppercase tracking-[0.28em] mb-3">
-            Encontra-nos em
+            {t('hero.findUs')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5">
             {FEATURED_LINKS.map((item) => (
@@ -124,7 +126,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 hover:text-white transition-colors"
-        aria-label="Descer"
+        aria-label={t('hero.scrollDown')}
       >
         <ChevronDown size={28} className="animate-bounce" />
       </motion.a>

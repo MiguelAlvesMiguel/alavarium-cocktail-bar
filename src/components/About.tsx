@@ -2,30 +2,20 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Wine, Music, GlassWater } from 'lucide-react'
 import type { LightboxItem } from '../App'
-
-const HIGHLIGHTS = [
-  {
-    icon: Wine,
-    title: 'Cocktails Autorais',
-    desc: 'Criações exclusivas da nossa equipa com ingredientes premium e técnicas modernas de mixologia.',
-  },
-  {
-    icon: Music,
-    title: 'Ambiente Único',
-    desc: 'Um espaço intimista com música selecionada e iluminação pensada para noites inesquecíveis.',
-  },
-  {
-    icon: GlassWater,
-    title: 'Vinhos & Spirits',
-    desc: 'Uma carta cuidadosamente selecionada de vinhos portugueses e destilados internacionais.',
-  },
-]
+import { useI18n } from '../i18n/I18nContext'
 
 const ABOUT_IMAGE = '/about-interior.webp'
 
 export default function About({ onMediaClick }: { onMediaClick: (item: LightboxItem) => void }) {
+  const { t } = useI18n()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
+
+  const highlights = [
+    { icon: Wine, title: t('about.h1'), desc: t('about.h1d') },
+    { icon: Music, title: t('about.h2'), desc: t('about.h2d') },
+    { icon: GlassWater, title: t('about.h3'), desc: t('about.h3d') },
+  ]
 
   return (
     <section
@@ -41,15 +31,12 @@ export default function About({ onMediaClick }: { onMediaClick: (item: LightboxI
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-2xl"
           >
-            <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">Sobre Nós</p>
+            <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">{t('about.kicker')}</p>
             <h2 className="font-display text-brand-900 text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Onde a sofisticação<br />encontra o sabor
+              {t('about.title')}
             </h2>
             <p className="mt-6 text-brand-500 text-lg leading-relaxed max-w-xl">
-              No coração de Aveiro, o Alavarium Cocktail Bar é um destino para
-              apreciadores de cocktails e de noites bem passadas. Com dedicação à arte
-              da mixologia, oferecemos uma experiência que celebra sabores únicos,
-              criatividade e um ambiente envolvente.
+              {t('about.body')}
             </p>
           </motion.div>
 
@@ -66,7 +53,7 @@ export default function About({ onMediaClick }: { onMediaClick: (item: LightboxI
             >
               <img
                 src={ABOUT_IMAGE}
-                alt="Interior Alavarium Cocktail Bar"
+                alt={t('about.imgAlt')}
                 loading="lazy"
                 className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-700"
               />
@@ -76,7 +63,7 @@ export default function About({ onMediaClick }: { onMediaClick: (item: LightboxI
         </div>
 
         <div className="mt-16 md:mt-20 grid md:grid-cols-3 gap-12 md:gap-8">
-          {HIGHLIGHTS.map((item, i) => (
+          {highlights.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 30 }}

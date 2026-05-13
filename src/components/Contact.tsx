@@ -1,15 +1,20 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, type FormEvent } from 'react'
-import { MapPin, Clock, Instagram, Facebook, Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
+import { MapPin, Clock, Instagram, Facebook, Phone, Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
 import { submitNetlifyForm } from '../lib/netlifyForms'
+import { useI18n } from '../i18n/I18nContext'
 
 const GMAPS_LINK =
   'https://www.google.com/maps/place/Alavarium+Cocktail+Bar/@40.6412,-8.6538,17z/data=!4m6!3m5!1s0xd2398033df80d7f:0xe8dde7e6b0398a7a!8m2!3d40.6428084!4d-8.6563199!16s%2Fg%2F11ckvlf0rn?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D'
+
+const PHONE_DISPLAY = '+351 918 489 986'
+const PHONE_TEL = '+351918489986'
 
 const inquiryFieldClass =
   'w-full min-h-[44px] px-3 py-2.5 text-base bg-white border border-brand-200 text-brand-900 placeholder:text-brand-400 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 touch-manipulation'
 
 export default function Contact() {
+  const { t } = useI18n()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const inquiryRef = useRef<HTMLFormElement>(null)
@@ -32,15 +37,15 @@ export default function Contact() {
     const trimmedMessage = message.trim()
 
     if (!trimmedName) {
-      setInquiryError('Indica o teu nome.')
+      setInquiryError(t('contact.errName'))
       return
     }
     if (!trimmedEmail) {
-      setInquiryError('Indica um e-mail para podermos responder.')
+      setInquiryError(t('contact.errEmail'))
       return
     }
     if (!trimmedMessage) {
-      setInquiryError('Escreve a tua mensagem.')
+      setInquiryError(t('contact.errMessage'))
       return
     }
 
@@ -53,7 +58,7 @@ export default function Contact() {
       setEmail('')
       setMessage('')
     } catch {
-      setInquiryError('Não foi possível enviar. Tenta outra vez ou contacta-nos nas redes sociais.')
+      setInquiryError(t('contact.errSubmit'))
     } finally {
       setInquirySubmitting(false)
     }
@@ -72,20 +77,18 @@ export default function Contact() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">Contacto</p>
+            <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">{t('contact.kicker')}</p>
             <h2 className="font-display text-brand-900 text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Visita-nos
+              {t('contact.title')}
             </h2>
 
             <div className="mt-10 space-y-8">
               <div className="flex gap-4">
                 <MapPin size={20} className="text-brand-400 flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-brand-900 font-medium">Morada</p>
-                  <p className="text-brand-500 mt-1 leading-relaxed">
-                    R. do Lavadouro 2<br />
-                    3800-198 Aveiro<br />
-                    Portugal
+                  <p className="text-brand-900 font-medium">{t('contact.address')}</p>
+                  <p className="text-brand-500 mt-1 leading-relaxed whitespace-pre-line">
+                    {t('contact.addressLines')}
                   </p>
                   <a
                     href={GMAPS_LINK}
@@ -93,7 +96,20 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     className="inline-block mt-2 text-brand-700 hover:text-brand-900 text-sm font-medium transition-colors"
                   >
-                    Obter direções &rarr;
+                    {t('contact.directions')}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <Phone size={20} className="text-brand-400 flex-shrink-0 mt-1" />
+                <div>
+                  <p className="text-brand-900 font-medium">{t('contact.phone')}</p>
+                  <a
+                    href={`tel:${PHONE_TEL}`}
+                    className="inline-block mt-1 text-brand-500 hover:text-brand-900 transition-colors tabular-nums"
+                  >
+                    {PHONE_DISPLAY}
                   </a>
                 </div>
               </div>
@@ -101,11 +117,11 @@ export default function Contact() {
               <div className="flex gap-4">
                 <Clock size={20} className="text-brand-400 flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-brand-900 font-medium">Horário</p>
+                  <p className="text-brand-900 font-medium">{t('contact.hours')}</p>
                   <div className="text-brand-500 mt-1 space-y-1 text-sm leading-relaxed">
-                    <p><strong className="text-brand-700">Segunda:</strong> 10:30 – 20:00</p>
-                    <p><strong className="text-brand-700">Terça a Sábado:</strong> 10:30 – 02:00</p>
-                    <p><strong className="text-brand-700">Domingo:</strong> Encerrado</p>
+                    <p><strong className="text-brand-700">{t('contact.mon')}:</strong> 10:30 – 20:00</p>
+                    <p><strong className="text-brand-700">{t('contact.tueSat')}:</strong> 10:30 – 02:00</p>
+                    <p><strong className="text-brand-700">{t('contact.sun')}:</strong> {t('contact.closed')}</p>
                   </div>
                 </div>
               </div>
@@ -113,7 +129,7 @@ export default function Contact() {
               <div className="flex gap-4">
                 <Instagram size={20} className="text-brand-400 flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-brand-900 font-medium">Redes Sociais</p>
+                  <p className="text-brand-900 font-medium">{t('contact.social')}</p>
                   <div className="flex gap-4 mt-2">
                     <a
                       href="https://www.instagram.com/alavariumcocktailbar/"
@@ -144,9 +160,9 @@ export default function Contact() {
               transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="mt-12 border border-brand-200 bg-white p-5 sm:p-6 shadow-sm"
             >
-              <h3 className="font-display text-brand-900 text-xl sm:text-2xl">Enviar mensagem</h3>
+              <h3 className="font-display text-brand-900 text-xl sm:text-2xl">{t('contact.sendMessage')}</h3>
               <p className="mt-2 text-brand-600 text-sm leading-relaxed">
-                Dúvidas ou sugestões? Escreve-nos — respondemos por e-mail.
+                {t('contact.sendMessageBody')}
               </p>
               <form
                 ref={inquiryRef}
@@ -164,7 +180,7 @@ export default function Contact() {
 
                 <label className="block">
                   <span className="text-brand-800 text-xs font-semibold uppercase tracking-wider mb-2 block">
-                    Nome
+                    {t('contact.name')}
                   </span>
                   <input
                     type="text"
@@ -179,7 +195,7 @@ export default function Contact() {
 
                 <label className="block">
                   <span className="text-brand-800 text-xs font-semibold uppercase tracking-wider mb-2 block">
-                    E-mail
+                    {t('contact.email')}
                   </span>
                   <input
                     type="email"
@@ -195,7 +211,7 @@ export default function Contact() {
 
                 <label className="block">
                   <span className="text-brand-800 text-xs font-semibold uppercase tracking-wider mb-2 block">
-                    Mensagem
+                    {t('contact.message')}
                   </span>
                   <textarea
                     name="message"
@@ -215,12 +231,12 @@ export default function Contact() {
                   {inquirySubmitting ? (
                     <>
                       <Loader2 size={18} className="animate-spin" aria-hidden />
-                      A enviar…
+                      {t('contact.sending')}
                     </>
                   ) : (
                     <>
                       <Send size={16} aria-hidden />
-                      Enviar
+                      {t('contact.send')}
                     </>
                   )}
                 </button>
@@ -243,7 +259,7 @@ export default function Contact() {
                   >
                     <CheckCircle2 size={18} className="mt-0.5 flex-shrink-0" aria-hidden />
                     <p className="text-sm leading-relaxed">
-                      Mensagem enviada. Obrigado — vamos responder em breve.
+                      {t('contact.sentOk')}
                     </p>
                   </div>
                 )}
@@ -258,7 +274,7 @@ export default function Contact() {
             className="w-full h-72 sm:h-80 lg:h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[360px]"
           >
             <iframe
-              title="Localização Alavarium Cocktail Bar"
+              title={t('contact.mapTitle')}
               src="https://maps.google.com/maps?q=Alavarium+Cocktail+Bar+Aveiro+Portugal&t=&z=15&ie=UTF8&iwloc=&output=embed"
               className="w-full h-full border-0 grayscale-[0.3] contrast-[1.1]"
               loading="lazy"

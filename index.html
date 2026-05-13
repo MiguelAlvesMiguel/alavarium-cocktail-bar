@@ -16,23 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <!-- Netlify parses these at deploy to enable Forms for the SPA. -->
-    <form
-      name="table-reservation"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      style="display: none"
-      aria-hidden="true"
-    >
-      <input type="text" name="customer-name" />
-      <input type="tel" name="phone" />
-      <input type="text" name="guests" />
-      <input type="text" name="date" />
-      <input type="text" name="time" />
-      <textarea name="notes"></textarea>
-      <input name="bot-field" />
-    </form>
+    <!-- Netlify parses this at deploy to enable Forms for the SPA. -->
     <form
       name="site-inquiry"
       method="POST"

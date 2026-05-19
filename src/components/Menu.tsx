@@ -27,6 +27,12 @@ export default function Menu() {
           <h2 className="font-display text-white text-3xl sm:text-4xl md:text-5xl leading-tight">
             {t('menu.title')}
           </h2>
+          <a
+            href="/menu"
+            className="mt-6 inline-flex items-center text-white/60 hover:text-white text-xs font-body tracking-widest uppercase border-b border-white/20 hover:border-white/60 pb-1 transition-colors duration-300"
+          >
+            {t('menu.viewFull')}
+          </a>
         </motion.div>
 
         <motion.div

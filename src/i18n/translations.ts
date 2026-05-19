@@ -54,6 +54,21 @@ export const translations = {
   menu: {
     kicker: { pt: 'Carta', en: 'Menu' },
     title: { pt: 'A Nossa Carta', en: 'Our Menu' },
+    viewFull: { pt: 'Ver carta completa', en: 'View full menu' },
+  },
+  menuPage: {
+    kicker: { pt: 'Carta', en: 'Menu' },
+    title: { pt: 'A Nossa Carta', en: 'Our Menu' },
+    subtitle: {
+      pt: 'Cocktails autorais, clássicos, vinhos e spirits selecionados.',
+      en: 'Signature cocktails, classics, curated wines and spirits.',
+    },
+    back: { pt: 'Voltar ao site', en: 'Back to site' },
+    reserve: { pt: 'Reservar Mesa', en: 'Book a Table' },
+    note: {
+      pt: 'Preços em euros. IVA incluído. A carta pode sofrer alterações.',
+      en: 'Prices in euros. VAT included. The menu is subject to change.',
+    },
   },
   gallery: {
     kicker: { pt: 'Galeria', en: 'Gallery' },

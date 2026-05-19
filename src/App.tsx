@@ -9,6 +9,7 @@ import BookTable from './components/BookTable'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Lightbox from './components/Lightbox'
+import MenuPage from './components/MenuPage'
 
 export type LightboxItem = {
   kind: 'image' | 'video'
@@ -21,6 +22,10 @@ export default function App() {
 
   const openLightbox = useCallback((item: LightboxItem) => setLightbox(item), [])
   const closeLightbox = useCallback(() => setLightbox(null), [])
+
+  if (typeof window !== 'undefined' && /^\/menu\/?$/.test(window.location.pathname)) {
+    return <MenuPage />
+  }
 
   return (
     <>

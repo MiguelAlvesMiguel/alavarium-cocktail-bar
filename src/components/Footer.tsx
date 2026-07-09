@@ -4,7 +4,6 @@ import { useI18n } from '../i18n/I18nContext'
 const LINKS = [
   { key: 'nav.menu', href: '#carta' },
   { key: 'nav.gallery', href: '#gallery' },
-  { key: 'nav.reserve', href: '#reserve' },
   { key: 'nav.contact', href: '#contact' },
 ] as const
 

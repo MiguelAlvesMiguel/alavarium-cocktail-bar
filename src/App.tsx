@@ -1,11 +1,9 @@
 import { useState, useCallback } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
 import Menu from './components/Menu'
 import Gallery from './components/Gallery'
 import Testimonials from './components/Testimonials'
-import BookTable from './components/BookTable'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Lightbox from './components/Lightbox'
@@ -32,11 +30,9 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <About onMediaClick={openLightbox} />
         <Menu />
         <Gallery onMediaClick={openLightbox} />
         <Testimonials onMediaClick={openLightbox} />
-        <BookTable />
         <Contact />
       </main>
       <Footer />

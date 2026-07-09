@@ -3,7 +3,7 @@ export type Lang = 'pt' | 'en'
 export const translations = {
   nav: {
     about: { pt: 'Sobre', en: 'About' },
-    menu: { pt: 'Carta', en: 'Menu' },
+    menu: { pt: 'Menu', en: 'Menu' },
     gallery: { pt: 'Galeria', en: 'Gallery' },
     testimonials: { pt: 'Testemunhos', en: 'Reviews' },
     reserve: { pt: 'Reservar', en: 'Reserve' },
@@ -46,19 +46,19 @@ export const translations = {
     },
     h3: { pt: 'Vinhos & Spirits', en: 'Wines & Spirits' },
     h3d: {
-      pt: 'Uma carta cuidadosamente selecionada de vinhos portugueses e destilados internacionais.',
+      pt: 'Um menu cuidadosamente selecionado de vinhos portugueses e destilados internacionais.',
       en: 'A carefully curated list of Portuguese wines and international spirits.',
     },
     imgAlt: { pt: 'Interior Alavarium Cocktail Bar', en: 'Alavarium Cocktail Bar interior' },
   },
   menu: {
-    kicker: { pt: 'Carta', en: 'Menu' },
-    title: { pt: 'A Nossa Carta', en: 'Our Menu' },
-    viewFull: { pt: 'Ver carta completa', en: 'View full menu' },
+    kicker: { pt: 'Menu', en: 'Menu' },
+    title: { pt: 'O Nosso Menu', en: 'Our Menu' },
+    viewFull: { pt: 'Ver menu completo', en: 'View full menu' },
   },
   menuPage: {
-    kicker: { pt: 'Carta', en: 'Menu' },
-    title: { pt: 'A Nossa Carta', en: 'Our Menu' },
+    kicker: { pt: 'Menu', en: 'Menu' },
+    title: { pt: 'O Nosso Menu', en: 'Our Menu' },
     subtitle: {
       pt: 'Cocktails autorais, clássicos, vinhos e spirits selecionados.',
       en: 'Signature cocktails, classics, curated wines and spirits.',
@@ -66,7 +66,7 @@ export const translations = {
     back: { pt: 'Voltar ao site', en: 'Back to site' },
     reserve: { pt: 'Reservar Mesa', en: 'Book a Table' },
     note: {
-      pt: 'Preços em euros. IVA incluído. A carta pode sofrer alterações.',
+      pt: 'Preços em euros. IVA incluído. O menu pode sofrer alterações.',
       en: 'Prices in euros. VAT included. The menu is subject to change.',
     },
   },

@@ -12,7 +12,7 @@ export default function MenuPage() {
     const prev = document.title
     document.title =
       lang === 'pt'
-        ? 'Carta — Alavarium Cocktail Bar'
+        ? 'Menu — Alavarium Cocktail Bar'
         : 'Menu — Alavarium Cocktail Bar'
     return () => {
       document.title = prev
@@ -115,10 +115,10 @@ export default function MenuPage() {
               {t('menuPage.note')}
             </p>
             <a
-              href="/#reserve"
+              href="/#contact"
               className="inline-flex items-center px-8 py-3 bg-white text-brand-950 text-xs font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
             >
-              {t('menuPage.reserve')}
+              {t('nav.contact')}
             </a>
           </div>
         </div>

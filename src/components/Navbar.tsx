@@ -5,11 +5,9 @@ import { useI18n } from '../i18n/I18nContext'
 import LanguageSwitcher from './LanguageSwitcher'
 
 const NAV_LINKS = [
-  { href: '#about', key: 'nav.about' },
   { href: '#carta', key: 'nav.menu' },
   { href: '#gallery', key: 'nav.gallery' },
   { href: '#testimonials', key: 'nav.testimonials' },
-  { href: '#reserve', key: 'nav.reserve' },
   { href: '#contact', key: 'nav.contact' },
 ] as const
 
@@ -113,10 +111,10 @@ export default function Navbar() {
             <Facebook size={18} />
           </a>
           <a
-            href="#reserve"
+            href="#carta"
             className="ml-2 px-5 py-2 bg-white text-brand-950 text-xs font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
           >
-            {t('nav.reserveCta')}
+            {t('nav.menu')}
           </a>
         </div>
 
@@ -175,11 +173,11 @@ export default function Navbar() {
           </a>
         </div>
         <a
-          href="#reserve"
-          onClick={(event) => handleMenuLinkClick(event, '#reserve')}
+          href="#carta"
+          onClick={(event) => handleMenuLinkClick(event, '#carta')}
           className="mt-8 px-8 py-3 bg-white text-brand-950 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors"
         >
-          {t('nav.reserveTableCta')}
+          {t('nav.menu')}
         </a>
       </div>
     </header>

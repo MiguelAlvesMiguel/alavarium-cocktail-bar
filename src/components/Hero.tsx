@@ -79,10 +79,10 @@ export default function Hero() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="#reserve"
+            href="#carta"
             className="px-8 py-3.5 bg-white text-brand-950 text-sm font-semibold uppercase tracking-widest hover:bg-white/90 transition-colors duration-300"
           >
-            {t('hero.reserve')}
+            {t('nav.menu')}
           </a>
           <a
             href={GMAPS_LINK}
@@ -121,7 +121,7 @@ export default function Hero() {
       </div>
 
       <motion.a
-        href="#about"
+        href="#carta"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}

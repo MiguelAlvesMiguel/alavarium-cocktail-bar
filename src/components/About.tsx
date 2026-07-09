@@ -4,9 +4,7 @@ import { Wine, Music, GlassWater } from 'lucide-react'
 import type { LightboxItem } from '../App'
 import { useI18n } from '../i18n/I18nContext'
 
-const ABOUT_IMAGE = '/about-interior.webp'
-
-export default function About({ onMediaClick }: { onMediaClick: (item: LightboxItem) => void }) {
+export default function About(_props: { onMediaClick: (item: LightboxItem) => void }) {
   const { t } = useI18n()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
@@ -24,43 +22,20 @@ export default function About({ onMediaClick }: { onMediaClick: (item: LightboxI
       className="relative py-24 md:py-32 section-padding bg-brand-50"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-2xl"
-          >
-            <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">{t('about.kicker')}</p>
-            <h2 className="font-display text-brand-900 text-3xl sm:text-4xl md:text-5xl leading-tight">
-              {t('about.title')}
-            </h2>
-            <p className="mt-6 text-brand-500 text-lg leading-relaxed max-w-xl">
-              {t('about.body')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-          >
-            <button
-              type="button"
-              onClick={() => onMediaClick({ kind: 'image', src: ABOUT_IMAGE, alt: 'Alavarium' })}
-              className="w-full h-[320px] sm:h-[380px] lg:h-[430px] bg-brand-100 shadow-[0_24px_60px_rgba(0,0,0,0.15)] cursor-zoom-in overflow-hidden"
-            >
-              <img
-                src={ABOUT_IMAGE}
-                alt={t('about.imgAlt')}
-                loading="lazy"
-                className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-700"
-              />
-            </button>
-            <div className="absolute -bottom-4 -left-4 hidden sm:block w-24 h-24 border border-brand-300" />
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <p className="text-brand-500 font-body text-sm tracking-[0.3em] uppercase mb-4">{t('about.kicker')}</p>
+          <h2 className="font-display text-brand-900 text-3xl sm:text-4xl md:text-5xl leading-tight">
+            {t('about.title')}
+          </h2>
+          <p className="mt-6 text-brand-500 text-lg leading-relaxed">
+            {t('about.body')}
+          </p>
+        </motion.div>
 
         <div className="mt-16 md:mt-20 grid md:grid-cols-3 gap-12 md:gap-8">
           {highlights.map((item, i) => (

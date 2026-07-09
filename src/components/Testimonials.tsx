@@ -80,15 +80,14 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
                   <button
                     key={img}
                     type="button"
-                    onClick={() => onMediaClick({ kind: 'image', src: img, alt: `${review.author} - photo ${i + 1}` })}
+                    onClick={() => onMediaClick({ kind: 'image', src: img, alt: `Alavarium - ${review.author}` })}
                     className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden rounded-md border border-white/10 hover:border-white/40 transition-colors cursor-zoom-in group"
-                    aria-label={`${review.author} - photo ${i + 1}`}
+                    aria-label={`Alavarium - ${review.author} ${i + 1}`}
                   >
                     <img
                       src={img}
-                      alt={`${review.author} - photo ${i + 1}`}
+                      alt={`Alavarium - ${review.author} ${i + 1}`}
                       loading="lazy"
-                      referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </button>

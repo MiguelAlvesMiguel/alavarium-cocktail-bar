@@ -18,7 +18,7 @@ export default function Footer() {
             <img
               src="/logo.png"
               srcSet={srcSet('/logo.png')}
-              sizes="56px"
+              sizes="112px"
               width={1024}
               height={1024}
               loading="lazy"

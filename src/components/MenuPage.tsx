@@ -28,7 +28,7 @@ export default function MenuPage() {
             <img
               src="/logo.png"
               srcSet={srcSet('/logo.png')}
-              sizes="(min-width: 768px) 48px, 40px"
+              sizes="(min-width: 768px) 96px, 80px"
               width={1024}
               height={1024}
               alt="Alavarium"

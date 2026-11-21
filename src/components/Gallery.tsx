@@ -112,7 +112,7 @@ export default function Gallery({ onMediaClick }: { onMediaClick: (item: Lightbo
                   <img
                     src={media.src}
                     srcSet={srcSet(media.src)}
-                    sizes="(min-width: 1280px) 384px, (min-width: 640px) 33vw, 50vw"
+                    sizes="(min-width: 1280px) 800px, (min-width: 640px) 70vw, 100vw"
                     decoding="async"
                     alt={`Alavarium ${i + 1}`}
                     loading="lazy"

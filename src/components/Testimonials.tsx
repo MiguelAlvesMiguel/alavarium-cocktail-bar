@@ -88,7 +88,7 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
                     <img
                       src={img}
                       srcSet={srcSet(img)}
-                      sizes="(min-width: 640px) 96px, 80px"
+                      sizes="(min-width: 640px) 202px, 168px"
                       decoding="async"
                       alt={`Alavarium - ${review.author} ${i + 1}`}
                       loading="lazy"

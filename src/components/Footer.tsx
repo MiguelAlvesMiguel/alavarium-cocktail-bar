@@ -1,5 +1,6 @@
 import { Instagram, Facebook } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
+import { srcSet } from '../lib/srcset'
 
 const LINKS = [
   { key: 'nav.menu', href: '#carta' },
@@ -16,6 +17,12 @@ export default function Footer() {
           <div>
             <img
               src="/logo.png"
+              srcSet={srcSet('/logo.png')}
+              sizes="56px"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              decoding="async"
               alt="Alavarium Cocktail Bar"
               className="h-14 w-auto rounded-full mb-4"
             />

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
 import { menuCategories, tr } from '../data/menu'
 import { useI18n } from '../i18n/I18nContext'
+import { srcSet } from '../lib/srcset'
 import LanguageSwitcher from './LanguageSwitcher'
 
 export default function MenuPage() {
@@ -26,6 +27,10 @@ export default function MenuPage() {
           <a href="/" className="flex items-center gap-3">
             <img
               src="/logo.png"
+              srcSet={srcSet('/logo.png')}
+              sizes="(min-width: 768px) 48px, 40px"
+              width={1024}
+              height={1024}
               alt="Alavarium"
               className="h-10 md:h-12 w-auto rounded-full"
             />

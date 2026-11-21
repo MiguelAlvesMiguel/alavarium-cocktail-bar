@@ -4,6 +4,7 @@ import { Star, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import { testimonials } from '../data/testimonials'
 import type { LightboxItem } from '../App'
 import { useI18n } from '../i18n/I18nContext'
+import { srcSet } from '../lib/srcset'
 
 function Stars({ count }: { count: number }) {
   return (
@@ -86,6 +87,9 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
                   >
                     <img
                       src={img}
+                      srcSet={srcSet(img)}
+                      sizes="(min-width: 640px) 96px, 80px"
+                      decoding="async"
                       alt={`Alavarium - ${review.author} ${i + 1}`}
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

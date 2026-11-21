@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import type { MouseEvent } from 'react'
 import { Menu, X, Instagram, Facebook } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
+import { srcSet } from '../lib/srcset'
 import LanguageSwitcher from './LanguageSwitcher'
 
 const NAV_LINKS = [
@@ -69,6 +70,10 @@ export default function Navbar() {
         <a href="#" className="relative z-50 flex items-center gap-3">
           <img
             src="/logo.png"
+            srcSet={srcSet('/logo.png')}
+            sizes="(min-width: 768px) 48px, 40px"
+            width={1024}
+            height={1024}
             alt="Alavarium"
             className="h-10 md:h-12 w-auto rounded-full"
           />
@@ -160,6 +165,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/50 hover:text-white transition-colors"
+            aria-label="Instagram"
           >
             <Instagram size={22} />
           </a>
@@ -168,6 +174,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/50 hover:text-white transition-colors"
+            aria-label="Facebook"
           >
             <Facebook size={22} />
           </a>

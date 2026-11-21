@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { Instagram } from 'lucide-react'
 import type { LightboxItem } from '../App'
 import { useI18n } from '../i18n/I18nContext'
+import { srcSet } from '../lib/srcset'
 
 const GALLERY_IMAGES = [
   '/assets/alavariumcocktailbar__2026-04-02T130942.000Z.jpg',
@@ -110,6 +111,9 @@ export default function Gallery({ onMediaClick }: { onMediaClick: (item: Lightbo
                 >
                   <img
                     src={media.src}
+                    srcSet={srcSet(media.src)}
+                    sizes="(min-width: 1280px) 384px, (min-width: 640px) 33vw, 50vw"
+                    decoding="async"
                     alt={`Alavarium ${i + 1}`}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"

@@ -4,6 +4,7 @@ import { Star, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import { testimonials } from '../data/testimonials'
 import type { LightboxItem } from '../App'
 import { useI18n } from '../i18n/I18nContext'
+import { srcSet } from '../lib/srcset'
 
 function Stars({ count }: { count: number }) {
   return (
@@ -71,7 +72,7 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
 
             <div className="mt-8">
               <p className="text-white font-display text-lg">{review.author}</p>
-              <p className="text-white/35 text-sm mt-1">{t('testimonials.source')}</p>
+              <p className="text-white/50 text-sm mt-1">{t('testimonials.source')}</p>
             </div>
 
             {review.images.length > 0 && (
@@ -86,6 +87,9 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
                   >
                     <img
                       src={img}
+                      srcSet={srcSet(img)}
+                      sizes="(min-width: 640px) 96px, 80px"
+                      decoding="async"
                       alt={`Alavarium - ${review.author} ${i + 1}`}
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -120,7 +124,7 @@ export default function Testimonials({ onMediaClick }: { onMediaClick: (item: Li
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  className={`box-content p-2 -m-2 bg-clip-content w-2 h-2 rounded-full transition-all duration-300 ${
                     i === current ? 'bg-white w-6' : 'bg-white/25'
                   }`}
                   aria-label={`Ir para testemunho ${i + 1}`}

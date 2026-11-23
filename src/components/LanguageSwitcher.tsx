@@ -21,13 +21,14 @@ export default function LanguageSwitcher({ variant = 'dark' }: { variant?: 'dark
             onClick={() => setLang(opt)}
             aria-pressed={lang === opt}
             className={
-              lang === opt
+              'p-1 -m-1 ' +
+              (lang === opt
                 ? dark
                   ? 'text-white'
                   : 'text-brand-900'
                 : dark
                 ? 'text-white/50 hover:text-white transition-colors'
-                : 'text-brand-500 hover:text-brand-900 transition-colors'
+                : 'text-brand-500 hover:text-brand-900 transition-colors')
             }
           >
             {opt.toUpperCase()}

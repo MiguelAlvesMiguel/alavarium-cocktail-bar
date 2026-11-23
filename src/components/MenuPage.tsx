@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
 import { menuCategories, tr } from '../data/menu'
 import { useI18n } from '../i18n/I18nContext'
+import { srcSet } from '../lib/srcset'
 import LanguageSwitcher from './LanguageSwitcher'
 
 export default function MenuPage() {
@@ -23,10 +24,14 @@ export default function MenuPage() {
     <div className="min-h-dvh bg-brand-950 text-white">
       <header className="sticky top-0 z-50 navbar-scrolled">
         <nav className="section-padding flex items-center justify-between h-16 md:h-20">
-          <a href="/" className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-3" aria-label="Alavarium">
             <img
               src="/logo.png"
-              alt="Alavarium"
+              srcSet={srcSet('/logo.png')}
+              sizes="(min-width: 768px) 48px, 40px"
+              width={1024}
+              height={1024}
+              alt=""
               className="h-10 md:h-12 w-auto rounded-full"
             />
             <span className="hidden sm:inline text-white font-display text-lg tracking-wide">
@@ -99,7 +104,7 @@ export default function MenuPage() {
                         </span>
                       </div>
                       {item.description && (
-                        <p className="mt-1.5 text-white/40 text-sm leading-relaxed">
+                        <p className="mt-1.5 text-white/50 text-sm leading-relaxed">
                           {tr(item.description, lang)}
                         </p>
                       )}
@@ -111,7 +116,7 @@ export default function MenuPage() {
           </div>
 
           <div className="mt-20 text-center">
-            <p className="text-white/30 font-body text-xs tracking-wide mb-8">
+            <p className="text-white/50 font-body text-xs tracking-wide mb-8">
               {t('menuPage.note')}
             </p>
             <a

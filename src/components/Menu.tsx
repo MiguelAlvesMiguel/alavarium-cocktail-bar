@@ -65,7 +65,7 @@ export default function Menu() {
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8"
         >
-          <p className="text-white/40 text-xs tracking-[0.3em] uppercase mb-8">
+          <p className="text-white/50 text-xs tracking-[0.3em] uppercase mb-8">
             {tr(category.label, lang)}
           </p>
 
@@ -73,15 +73,15 @@ export default function Menu() {
             {category.items.map((item) => (
               <div key={item.name.pt} className="group border-b border-white/10 pb-4">
                 <div className="flex items-baseline justify-between gap-4">
-                  <h4 className="font-display text-white/90 text-base sm:text-lg leading-snug group-hover:text-white transition-colors duration-300">
+                  <h3 className="font-display text-white/90 text-base sm:text-lg leading-snug group-hover:text-white transition-colors duration-300">
                     {tr(item.name, lang)}
-                  </h4>
+                  </h3>
                   <span className="flex-shrink-0 text-white/60 font-body text-sm tabular-nums font-medium">
                     €{item.price.toFixed(item.price % 1 === 0 ? 0 : 1)}
                   </span>
                 </div>
                 {item.description && (
-                  <p className="mt-1 text-white/40 text-sm leading-relaxed">
+                  <p className="mt-1 text-white/50 text-sm leading-relaxed">
                     {tr(item.description, lang)}
                   </p>
                 )}

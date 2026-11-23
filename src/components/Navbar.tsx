@@ -67,14 +67,14 @@ export default function Navbar() {
       }`}
     >
       <nav className="section-padding flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="relative z-50 flex items-center gap-3">
+        <a href="#" className="relative z-50 flex items-center gap-3" aria-label="Alavarium">
           <img
             src="/logo.png"
             srcSet={srcSet('/logo.png')}
-            sizes="(min-width: 768px) 96px, 80px"
+            sizes="(min-width: 768px) 48px, 40px"
             width={1024}
             height={1024}
-            alt="Alavarium"
+            alt=""
             className="h-10 md:h-12 w-auto rounded-full"
           />
           <span className="hidden sm:inline text-white font-display text-lg tracking-wide">
@@ -101,7 +101,7 @@ export default function Navbar() {
             href="https://www.instagram.com/alavariumcocktailbar/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="p-1 -m-1 text-white/50 hover:text-white transition-colors"
             aria-label="Instagram"
           >
             <Instagram size={18} />
@@ -110,7 +110,7 @@ export default function Navbar() {
             href="https://www.facebook.com/AlavariumCocktailBar/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="p-1 -m-1 text-white/50 hover:text-white transition-colors"
             aria-label="Facebook"
           >
             <Facebook size={18} />
@@ -164,7 +164,7 @@ export default function Navbar() {
             href="https://www.instagram.com/alavariumcocktailbar/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="p-1 -m-1 text-white/50 hover:text-white transition-colors"
             aria-label="Instagram"
           >
             <Instagram size={22} />
@@ -173,7 +173,7 @@ export default function Navbar() {
             href="https://www.facebook.com/AlavariumCocktailBar/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors"
+            className="p-1 -m-1 text-white/50 hover:text-white transition-colors"
             aria-label="Facebook"
           >
             <Facebook size={22} />

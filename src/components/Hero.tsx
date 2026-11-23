@@ -29,9 +29,9 @@ export default function Hero() {
         <img
           src="/hero.jpg"
           srcSet={srcSet('/hero.jpg')}
-          sizes="(max-aspect-ratio: 4/3) 268vh, 200vw"
-          fetchPriority="high"
-          decoding="async"
+          sizes="(max-aspect-ratio: 4/3) 134vh, 100vw"
+          width={4032}
+          height={3024}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -55,7 +55,7 @@ export default function Hero() {
           <img
             src="/logo.png"
             srcSet={srcSet('/logo.png')}
-            sizes="(min-width: 768px) 640px, (min-width: 640px) 512px, 384px"
+            sizes="(min-width: 768px) 320px, (min-width: 640px) 256px, 192px"
             width={1024}
             height={1024}
             alt="Alavarium Cocktail Bar"
@@ -110,7 +110,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
           className="mt-10"
         >
-          <p className="text-white/30 text-[11px] uppercase tracking-[0.28em] mb-3">
+          <p className="text-white/50 text-[11px] uppercase tracking-[0.28em] mb-3">
             {t('hero.findUs')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5">

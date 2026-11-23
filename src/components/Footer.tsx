@@ -18,7 +18,7 @@ export default function Footer() {
             <img
               src="/logo.png"
               srcSet={srcSet('/logo.png')}
-              sizes="112px"
+              sizes="56px"
               width={1024}
               height={1024}
               loading="lazy"
@@ -48,7 +48,7 @@ export default function Footer() {
               href="https://www.instagram.com/alavariumcocktailbar/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors"
+              className="p-1 -m-1 text-white/50 hover:text-white transition-colors"
               aria-label="Instagram"
             >
               <Instagram size={20} />
@@ -57,7 +57,7 @@ export default function Footer() {
               href="https://www.facebook.com/AlavariumCocktailBar/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors"
+              className="p-1 -m-1 text-white/50 hover:text-white transition-colors"
               aria-label="Facebook"
             >
               <Facebook size={20} />
@@ -66,18 +66,18 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="text-white/40 text-xs">
+          <p className="text-white/50 text-xs">
             &copy; {new Date().getFullYear()} Alavarium Cocktail Bar. {t('footer.rights')}
           </p>
           <div className="flex flex-col sm:items-end gap-2 text-xs">
-            <p className="text-white/35">
+            <p className="text-white/50">
               {t('footer.city')}
             </p>
             <a
               href="https://www.livroreclamacoes.pt/Inicio/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/45 underline underline-offset-4 hover:text-white transition-colors"
+              className="text-white/50 underline underline-offset-4 hover:text-white transition-colors"
             >
               {t('footer.complaints')}
             </a>
@@ -85,7 +85,7 @@ export default function Footer() {
               href="https://www.nexosolutions.co/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/35 underline underline-offset-4 hover:text-white transition-colors"
+              className="text-white/50 underline underline-offset-4 hover:text-white transition-colors"
             >
               {t('footer.developedBy')}
             </a>

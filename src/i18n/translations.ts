@@ -167,7 +167,7 @@ export const translations = {
     },
     city: { pt: 'Aveiro, Portugal', en: 'Aveiro, Portugal' },
     complaints: { pt: 'Livro de Reclamações', en: 'Complaints Book' },
-    developedBy: { pt: 'Desenvolvido pela Nexo Solutions', en: 'Developed by Nexo Solutions' },
+    developedBy: { pt: 'Website criado por Nexo Solutions', en: 'Website created by Nexo Solutions' },
   },
   langSwitcher: { pt: 'PT', en: 'EN' },
 } as const
